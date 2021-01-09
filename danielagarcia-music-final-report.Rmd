@@ -70,7 +70,7 @@ First, I explored how the average age and mood before listening differs between 
 
 ```{r echo = F}
 # Display table of average age and mood per opinion
-load("avg_age_mood.Rdata")
+load("data/avg_age_mood.Rdata")
 avg_age_mood
 ```
 \newpage
@@ -79,7 +79,7 @@ I then plotted the distribution of opinions for each emotion. Based on the plot 
 
 ```{r echo = F, fig.height = 5, fig.width = 8}
 # Plot different opinions per emotion
-load("music_emotion_plots.Rdata")
+load("data/music_emotion_plots.Rdata")
 plot(music_emotion_plots)
 ```
 
@@ -87,7 +87,7 @@ Next, I plotted the distribution of opinions for each gender. Both men and women
 
 ```{r echo = F, fig.height = 4, fig.width = 8}
 # Plot different opinions per gender
-load("music_gender_plots.Rdata")
+load("data/music_gender_plots.Rdata")
 plot(music_gender_plots)
 ```
 
@@ -97,7 +97,7 @@ Next, I plotted the distribution of opinions for each song genre. The difference
 
 ```{r echo = F, fig.height = 3.5, fig.width = 7}
 # Plot different opinions per genre
-load("music_genre_plots.Rdata")
+load("data/music_genre_plots.Rdata")
 plot(music_genre_plots)
 ```
 
@@ -105,7 +105,7 @@ Finally, I plotted the distribution of opinions for each mother tongue (with a l
 
 ```{r echo = F}
 # Plot different opinions per language
-load("music_language_plots.Rdata")
+load("data/music_language_plots.Rdata")
 plot(music_language_plots)
 ```
 
@@ -125,17 +125,17 @@ Next, I generated predictions for the testing set ("music_test") opinions using 
 
 ```{r echo = F}
 # Plot accuracy for each model
-load("models.Rdata"); load("accuracies.Rdata")
+load("data/models.Rdata"); load("data/accuracies.Rdata")
 data.frame(model = models, accuracy = accuracies)
 ```
 
 I then decided to combine the 8 models into an ensemble model. For each entry in the testing ("music_test") set, the ensemble prediction was set equal to the most common prediction among all 8 models. I determined the accuracy of the ensemble model by comparing its opinion predictions to the real opinions in the testing set. The accuracy of the ensemble model was $\boxed{0.51188}$. Among the 8 models, Rborist and rf were the only models that were more accurate than the ensemble, suggesting that random forest algorithms are the best at making predictions on this data set. 
 
-Separately, before making predictions on the testing data, each predictive model estimated its own accuracy. I found the average of these estimated accuracies among the 8 models and built a second ensemble model using only the models whose estimated accuracy was greater than or equal to the mean estimated accuracy. The accuracy of this second ensemble model is $\boxed{0.52732}$.
+Separately, before making predictions on the testing data, each predictive model estimated its own accuracy. I found the average of these estimated accuracies among the 8 models and built a second ensemble model using only the models whose estimated accuracy was greater than or equal to the mean estimated accuracy. The accuracy of this second ensemble model is $\boxed{0.52969}$.
 
 # Results
 
-Based on the accuracies of the 8 models separately in addition to the accuracies of the first and second ensemble models, I decided to use the second ensemble model as my final model, which takes into account the lda, knn, multinom, Rborist, and rf predictions. The final model accuracy was $\boxed{0.52732}$.
+Based on the accuracies of the 8 models separately in addition to the accuracies of the first and second ensemble models, I decided to use the second ensemble model as my final model, which takes into account the lda, knn, multinom, Rborist, and rf predictions. The final model accuracy was $\boxed{0.52969}$.
 
 \newpage
 
@@ -150,6 +150,7 @@ This project took data on songs and reviews that listeners have given them and p
 The predictive quality of this model is moderately strong. It is certainly stronger than a model that simply guesses the opinion of each user, which has an accuracy of about 31.2% (randomly select between 3 opinions), but it is still subject to limitations. 
 
 For example, the model is trained on a fairly small set of data. With limited data, it is harder to find trends and associations between listeners, songs, and opinions. Therefore, the model's predictive quality is not as strong. If it had more data to train on, it could make more astute predictions about future listeners. 
+
 Another limitation of the model is that it takes all variables into account when generating predictions. This could be unnecessary, as not every predictor may be significant enough in predicting a listener's opinion about a song. A stronger model might only take into account the most significant predictors, which would also make the model-generating process faster.
 
 In addition, I originally started the model-building process with just 8 popular machine learning algorithms from the "caret" package. There are most likely more accurate algorithms within the package that I did not run, either because I was not familiar with them or their computing speed was too long. In a future version, given more knowledge, time, and computing power, I could include more accurate algorithms in the model-building process to make my final ensemble model more accurate.
