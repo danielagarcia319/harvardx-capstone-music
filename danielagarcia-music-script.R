@@ -99,6 +99,7 @@ accuracy_guess <- mean(y_hat_guess == music_test$opinion)
 # Generate 8 Classification Models (using common algorithms in caret package)
 models <- c("rpart", "lda", "naive_bayes", "knn", "multinom", "Rborist", "rf", "svmLinear")
 
+print("Fitting models, this will take time")
 set.seed(1, sample.kind = "Rounding") 
 fits <- lapply(models, function(model){ 
   print(model)
@@ -116,7 +117,7 @@ predictions <- sapply(fits, y_hat)
 # Determine accuracy of each model
 accuracies <- vector(length = length(models))
 for (i in 1:length(models)) {
-  accuracies[i] <- mean(predictions[,i] == music_test$opinion)
+  accuracies[i] <- confusionMatrix(as.factor(predictions[,i]), music_test$opinion)$overall[["Accuracy"]]
 }
 avg_accuracy <- mean(accuracies)
 
@@ -126,7 +127,7 @@ ensemble <- vector(length = nrow(music_test))
 for (i in 1:nrow(music_test)) {
   ensemble[i] <- names(which.max(table(predictions[i,])))
 }
-ensemble_accuracy <- mean(ensemble == music_test$opinion)
+ensemble_accuracy <- confusionMatrix(as.factor(ensemble), music_test$opinion)$overall[["Accuracy"]]
 
 # Determine which models are more accurate than the ensemble
 sum(accuracies > ensemble_accuracy)
@@ -147,7 +148,7 @@ ensemble_2 <- vector(length = nrow(music_test))
 for (i in 1:nrow(music_test)) {
   ensemble_2[i] <- names(which.max(table(predictions_2[i,])))
 }
-ensemble_accuracy_2 <- mean(ensemble_2 == music_test$opinion)
+ensemble_accuracy_2 <- confusionMatrix(as.factor(ensemble_2), music_test$opinion)$overall[["Accuracy"]]
 
 # Determine which models (if any) are more accurate than the second ensemble 
 sum(accuracies > ensemble_accuracy_2)
@@ -164,4 +165,3 @@ save(music_genre_plots, file = "data/music_genre_plots.Rdata")
 save(music_language_plots, file = "data/music_language_plots.Rdata")
 save(accuracies, file = "data/accuracies.Rdata")
 save(models, file = "data/models.Rdata")
-
