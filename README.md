@@ -10,7 +10,7 @@ To run the code yourself, clone the repository and run the `danielagarcia-music-
 
 ## About the Project
 
-This project took data on songs and reviews that listeners have given them and produced a model that predicts listeners' opinions regarding the songs. Listeners can either like, dislike, or have no opinion about a song. 
+This project takes data on songs and reviews that listeners have given them and produces a model that predicts listeners' opinions regarding the songs. Listeners can either like, dislike, or have no opinion about a song. 
 
 The predictive models I generated take into account the effects that the listener's age, gender, mother tongue, mood before listening, emotions felt whilst listening, and the song's ID and genre have on the opinion the listener has of the song in order to generate predictions. 
 
