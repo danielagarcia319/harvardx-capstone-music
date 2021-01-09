@@ -6,7 +6,7 @@ This repository contains the R code and final outputs of the Music Preferences m
 
 The final PDF report is stored as `danielagarcia-music-final-report.pdf`. 
 
-To run the code yourself, clone the repository and open the `danielagarcia-capstone-music.Rproj` file. The `danielagarcia-music-script.R` file will re-generate the necessary `.Rdata` files to create the final Rmd report.
+To run the code yourself, clone the repository and open the `danielagarcia-capstone-music.Rproj` file. Run the `danielagarcia-music-script.R` script to re-generate the necessary `.Rdata` files to create the final Rmd report.
 
 ## About the Project
 
