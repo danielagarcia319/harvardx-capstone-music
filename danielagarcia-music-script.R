@@ -157,11 +157,11 @@ models[which(accuracies > ensemble_accuracy_2)]
 
 ###### Save data as .Rdata for Markdown Report ######
 
-save(avg_age_mood, file = "avg_age_mood.Rdata")
-save(music_emotion_plots, file = "music_emotion_plots.Rdata")
-save(music_gender_plots, file = "music_gender_plots.Rdata")
-save(music_genre_plots, file = "music_genre_plots.Rdata")
-save(music_language_plots, file = "music_language_plots.Rdata")
-save(accuracies, file = "accuracies.Rdata")
-save(models, file = "models.Rdata")
+save(avg_age_mood, file = "data/avg_age_mood.Rdata")
+save(music_emotion_plots, file = "data/music_emotion_plots.Rdata")
+save(music_gender_plots, file = "data/music_gender_plots.Rdata")
+save(music_genre_plots, file = "data/music_genre_plots.Rdata")
+save(music_language_plots, file = "data/music_language_plots.Rdata")
+save(accuracies, file = "data/accuracies.Rdata")
+save(models, file = "data/models.Rdata")
 
